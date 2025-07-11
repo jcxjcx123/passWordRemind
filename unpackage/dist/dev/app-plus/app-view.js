@@ -285,25 +285,28 @@ var render = function () {
     "uni-view",
     { staticClass: _vm._$g(0, "sc"), attrs: { _i: 0 } },
     [
+      _vm._$g(1, "i")
+        ? _c("uni-view", { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } })
+        : _vm._e(),
       _c(
         "uni-view",
-        { staticClass: _vm._$g(1, "sc"), attrs: { _i: 1 } },
+        { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } },
         [
-          _c("uni-view", { staticClass: _vm._$g(2, "sc"), attrs: { _i: 2 } }, [
-            _vm._v(_vm._$g(2, "t0-0")),
+          _c("uni-view", { staticClass: _vm._$g(3, "sc"), attrs: { _i: 3 } }, [
+            _vm._v(_vm._$g(3, "t0-0")),
           ]),
           _c(
             "uni-forms",
-            { ref: "form", attrs: { _i: 3 } },
+            { ref: "form", attrs: { _i: 4 } },
             [
               _c(
                 "uni-forms-item",
-                { attrs: { _i: 4 } },
+                { attrs: { _i: 5 } },
                 [
                   _c("uni-easyinput", {
-                    attrs: { _i: 5 },
+                    attrs: { _i: 6 },
                     model: {
-                      value: _vm._$g(5, "v-model"),
+                      value: _vm._$g(6, "v-model"),
                       callback: function () {},
                       expression: "formData.password",
                     },
@@ -311,15 +314,15 @@ var render = function () {
                 ],
                 1
               ),
-              _vm._$g(6, "i")
+              _vm._$g(7, "i")
                 ? _c(
                     "uni-forms-item",
-                    { attrs: { _i: 6 } },
+                    { attrs: { _i: 7 } },
                     [
                       _c("uni-easyinput", {
-                        attrs: { _i: 7 },
+                        attrs: { _i: 8 },
                         model: {
-                          value: _vm._$g(7, "v-model"),
+                          value: _vm._$g(8, "v-model"),
                           callback: function () {},
                           expression: "formData.confirmPassword",
                         },
@@ -328,15 +331,15 @@ var render = function () {
                     1
                   )
                 : _vm._e(),
-              _vm._$g(8, "i")
+              _vm._$g(9, "i")
                 ? _c(
                     "uni-forms-item",
-                    { attrs: { _i: 8 } },
+                    { attrs: { _i: 9 } },
                     [
                       _c("uni-easyinput", {
-                        attrs: { _i: 9 },
+                        attrs: { _i: 10 },
                         model: {
-                          value: _vm._$g(9, "v-model"),
+                          value: _vm._$g(10, "v-model"),
                           callback: function () {},
                           expression: "formData.securityQuestion",
                         },
@@ -345,15 +348,15 @@ var render = function () {
                     1
                   )
                 : _vm._e(),
-              _vm._$g(10, "i")
+              _vm._$g(11, "i")
                 ? _c(
                     "uni-forms-item",
-                    { attrs: { _i: 10 } },
+                    { attrs: { _i: 11 } },
                     [
                       _c("uni-easyinput", {
-                        attrs: { _i: 11 },
+                        attrs: { _i: 12 },
                         model: {
-                          value: _vm._$g(11, "v-model"),
+                          value: _vm._$g(12, "v-model"),
                           callback: function () {},
                           expression: "formData.securityAnswer",
                         },
@@ -368,22 +371,22 @@ var render = function () {
           _c(
             "v-uni-button",
             {
-              staticClass: _vm._$g(12, "sc"),
-              attrs: { _i: 12 },
+              staticClass: _vm._$g(13, "sc"),
+              attrs: { _i: 13 },
               on: {
                 click: function ($event) {
                   return _vm.$handleViewEvent($event)
                 },
               },
             },
-            [_vm._v(_vm._$g(12, "t0-0"))]
+            [_vm._v(_vm._$g(13, "t0-0"))]
           ),
-          _vm._$g(13, "i")
+          _vm._$g(14, "i")
             ? _c(
                 "uni-view",
                 {
-                  staticClass: _vm._$g(13, "sc"),
-                  attrs: { _i: 13 },
+                  staticClass: _vm._$g(14, "sc"),
+                  attrs: { _i: 14 },
                   on: {
                     click: function ($event) {
                       return _vm.$handleViewEvent($event)
@@ -398,40 +401,40 @@ var render = function () {
       ),
       _c(
         "uni-popup",
-        { ref: "forgotPasswordPopup", attrs: { _i: 14 } },
+        { ref: "forgotPasswordPopup", attrs: { _i: 15 } },
         [
           _c(
             "uni-view",
-            { staticClass: _vm._$g(15, "sc"), attrs: { _i: 15 } },
+            { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
             [
               _c(
                 "uni-view",
-                { staticClass: _vm._$g(16, "sc"), attrs: { _i: 16 } },
+                { staticClass: _vm._$g(17, "sc"), attrs: { _i: 17 } },
                 [_vm._v("找回密码")]
               ),
-              _vm._$g(17, "i")
+              _vm._$g(18, "i")
                 ? _c(
                     "uni-view",
-                    { attrs: { _i: 17 } },
+                    { attrs: { _i: 18 } },
                     [
                       _c(
                         "uni-view",
-                        { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
-                        [_vm._v(_vm._$g(18, "t0-0"))]
+                        { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
+                        [_vm._v(_vm._$g(19, "t0-0"))]
                       ),
-                      _vm._$g(19, "i")
+                      _vm._$g(20, "i")
                         ? _c(
                             "uni-forms",
-                            { ref: "securityForm", attrs: { _i: 19 } },
+                            { ref: "securityForm", attrs: { _i: 20 } },
                             [
                               _c(
                                 "uni-forms-item",
-                                { attrs: { _i: 20 } },
+                                { attrs: { _i: 21 } },
                                 [
                                   _c("uni-easyinput", {
-                                    attrs: { _i: 21 },
+                                    attrs: { _i: 22 },
                                     model: {
-                                      value: _vm._$g(21, "v-model"),
+                                      value: _vm._$g(22, "v-model"),
                                       callback: function () {},
                                       expression: "securityFormData.answer",
                                     },
@@ -445,13 +448,13 @@ var render = function () {
                         : _vm._e(),
                       _c(
                         "uni-view",
-                        { staticClass: _vm._$g(22, "sc"), attrs: { _i: 22 } },
+                        { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
                         [
                           _c(
                             "v-uni-button",
                             {
-                              staticClass: _vm._$g(23, "sc"),
-                              attrs: { _i: 23 },
+                              staticClass: _vm._$g(24, "sc"),
+                              attrs: { _i: 24 },
                               on: {
                                 click: function ($event) {
                                   return _vm.$handleViewEvent($event)
@@ -460,12 +463,12 @@ var render = function () {
                             },
                             [_vm._v("取消")]
                           ),
-                          _vm._$g(24, "i")
+                          _vm._$g(25, "i")
                             ? _c(
                                 "v-uni-button",
                                 {
-                                  staticClass: _vm._$g(24, "sc"),
-                                  attrs: { _i: 24 },
+                                  staticClass: _vm._$g(25, "sc"),
+                                  attrs: { _i: 25 },
                                   on: {
                                     click: function ($event) {
                                       return _vm.$handleViewEvent($event)
@@ -478,23 +481,23 @@ var render = function () {
                         ],
                         1
                       ),
-                      _vm._$g(25, "i")
+                      _vm._$g(26, "i")
                         ? _c(
                             "uni-view",
                             {
-                              staticClass: _vm._$g(25, "sc"),
-                              attrs: { _i: 25 },
+                              staticClass: _vm._$g(26, "sc"),
+                              attrs: { _i: 26 },
                             },
                             [
-                              _c("v-uni-text", { attrs: { _i: 26 } }, [
+                              _c("v-uni-text", { attrs: { _i: 27 } }, [
                                 _vm._v("未设置安全问题，无法找回密码"),
                               ]),
                               _c(
                                 "v-uni-button",
                                 {
-                                  staticClass: _vm._$g(27, "sc"),
+                                  staticClass: _vm._$g(28, "sc"),
                                   staticStyle: { "margin-top": "20px" },
-                                  attrs: { _i: 27 },
+                                  attrs: { _i: 28 },
                                   on: {
                                     click: function ($event) {
                                       return _vm.$handleViewEvent($event)
@@ -511,23 +514,23 @@ var render = function () {
                     1
                   )
                 : _vm._e(),
-              _vm._$g(28, "i")
+              _vm._$g(29, "i")
                 ? _c(
                     "uni-view",
-                    { attrs: { _i: 28 } },
+                    { attrs: { _i: 29 } },
                     [
                       _c(
                         "uni-forms",
-                        { ref: "resetForm", attrs: { _i: 29 } },
+                        { ref: "resetForm", attrs: { _i: 30 } },
                         [
                           _c(
                             "uni-forms-item",
-                            { attrs: { _i: 30 } },
+                            { attrs: { _i: 31 } },
                             [
                               _c("uni-easyinput", {
-                                attrs: { _i: 31 },
+                                attrs: { _i: 32 },
                                 model: {
-                                  value: _vm._$g(31, "v-model"),
+                                  value: _vm._$g(32, "v-model"),
                                   callback: function () {},
                                   expression: "resetFormData.newPassword",
                                 },
@@ -537,12 +540,12 @@ var render = function () {
                           ),
                           _c(
                             "uni-forms-item",
-                            { attrs: { _i: 32 } },
+                            { attrs: { _i: 33 } },
                             [
                               _c("uni-easyinput", {
-                                attrs: { _i: 33 },
+                                attrs: { _i: 34 },
                                 model: {
-                                  value: _vm._$g(33, "v-model"),
+                                  value: _vm._$g(34, "v-model"),
                                   callback: function () {},
                                   expression: "resetFormData.confirmPassword",
                                 },
@@ -555,13 +558,13 @@ var render = function () {
                       ),
                       _c(
                         "uni-view",
-                        { staticClass: _vm._$g(34, "sc"), attrs: { _i: 34 } },
+                        { staticClass: _vm._$g(35, "sc"), attrs: { _i: 35 } },
                         [
                           _c(
                             "v-uni-button",
                             {
-                              staticClass: _vm._$g(35, "sc"),
-                              attrs: { _i: 35 },
+                              staticClass: _vm._$g(36, "sc"),
+                              attrs: { _i: 36 },
                               on: {
                                 click: function ($event) {
                                   return _vm.$handleViewEvent($event)
@@ -573,8 +576,8 @@ var render = function () {
                           _c(
                             "v-uni-button",
                             {
-                              staticClass: _vm._$g(36, "sc"),
-                              attrs: { _i: 36 },
+                              staticClass: _vm._$g(37, "sc"),
+                              attrs: { _i: 37 },
                               on: {
                                 click: function ($event) {
                                   return _vm.$handleViewEvent($event)
@@ -598,20 +601,20 @@ var render = function () {
       ),
       _c(
         "uni-popup",
-        { ref: "fingerprintSetupPopup", attrs: { _i: 37 } },
+        { ref: "fingerprintSetupPopup", attrs: { _i: 38 } },
         [
           _c(
             "uni-view",
-            { staticClass: _vm._$g(38, "sc"), attrs: { _i: 38 } },
+            { staticClass: _vm._$g(39, "sc"), attrs: { _i: 39 } },
             [
               _c(
                 "uni-view",
-                { staticClass: _vm._$g(39, "sc"), attrs: { _i: 39 } },
+                { staticClass: _vm._$g(40, "sc"), attrs: { _i: 40 } },
                 [_vm._v("启用指纹登录")]
               ),
               _c(
                 "uni-view",
-                { staticClass: _vm._$g(40, "sc"), attrs: { _i: 40 } },
+                { staticClass: _vm._$g(41, "sc"), attrs: { _i: 41 } },
                 [
                   _vm._v(
                     "启用指纹识别可以让您更便捷地登录应用，无需每次输入密码。"
@@ -620,13 +623,13 @@ var render = function () {
               ),
               _c(
                 "uni-view",
-                { staticClass: _vm._$g(41, "sc"), attrs: { _i: 41 } },
+                { staticClass: _vm._$g(42, "sc"), attrs: { _i: 42 } },
                 [
                   _c(
                     "v-uni-button",
                     {
-                      staticClass: _vm._$g(42, "sc"),
-                      attrs: { _i: 42 },
+                      staticClass: _vm._$g(43, "sc"),
+                      attrs: { _i: 43 },
                       on: {
                         click: function ($event) {
                           return _vm.$handleViewEvent($event)
@@ -638,8 +641,8 @@ var render = function () {
                   _c(
                     "v-uni-button",
                     {
-                      staticClass: _vm._$g(43, "sc"),
-                      attrs: { _i: 43 },
+                      staticClass: _vm._$g(44, "sc"),
+                      attrs: { _i: 44 },
                       on: {
                         click: function ($event) {
                           return _vm.$handleViewEvent($event)
@@ -2779,7 +2782,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 13);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n/* 指纹识别相关样式已移除，改为自动验证 */\r\n\r\n/* 指纹设置弹窗样式 */\n.fingerprint-setup-content[data-v-5b26a3ac] {\r\n\twidth: 320px;\r\n\tmax-width: 90vw;\r\n\tbackground-color: white;\r\n\tborder-radius: 15px;\r\n\tpadding: 25px 20px;\r\n\ttext-align: center;\r\n\tbox-sizing: border-box;\n}\n.fingerprint-setup-title[data-v-5b26a3ac] {\r\n\tfont-size: 18px;\r\n\tfont-weight: bold;\r\n\tcolor: #333;\r\n\tmargin-bottom: 15px;\r\n\tword-wrap: break-word;\n}\n.fingerprint-setup-desc[data-v-5b26a3ac] {\r\n\tfont-size: 14px;\r\n\tcolor: #666;\r\n\tline-height: 1.5;\r\n\tmargin-bottom: 25px;\r\n\tword-wrap: break-word;\r\n\ttext-align: left;\r\n\tpadding: 0 5px;\n}\n.fingerprint-setup-buttons[data-v-5b26a3ac] {\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\tgap: 12px;\n}\n.fingerprint-setup-buttons .btn-cancel[data-v-5b26a3ac],\r\n.fingerprint-setup-buttons .btn-confirm[data-v-5b26a3ac] {\r\n\tflex: 1;\r\n\theight: 42px;\r\n\tborder: none;\r\n\tborder-radius: 8px;\r\n\tfont-size: 15px;\r\n\tfont-weight: 500;\r\n\twhite-space: nowrap;\r\n\toverflow: hidden;\r\n\ttext-overflow: ellipsis;\n}\n.fingerprint-setup-buttons .btn-cancel[data-v-5b26a3ac] {\r\n\tbackground-color: #f5f5f5;\r\n\tcolor: #666;\n}\n.fingerprint-setup-buttons .btn-confirm[data-v-5b26a3ac] {\r\n\tbackground-color: #007aff;\r\n\tcolor: white;\n}\n.login-container[data-v-5b26a3ac] {\r\n\tdisplay: flex;\r\n\tjustify-content: center;\r\n\talign-items: center;\r\n\tmin-height: 100vh;\r\n\tbackground-color: #f5f5f5;\n}\n.login-box[data-v-5b26a3ac] {\r\n\twidth: 300px;\r\n\tpadding: 40px 30px;\r\n\tbackground-color: white;\r\n\tborder-radius: 10px;\r\n\tbox-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\n}\n.title[data-v-5b26a3ac] {\r\n\tfont-size: 24px;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\r\n\tmargin-bottom: 30px;\r\n\tcolor: #333;\n}\n.login-btn[data-v-5b26a3ac] {\r\n\twidth: 100%;\r\n\theight: 45px;\r\n\tbackground-color: #007aff;\r\n\tcolor: white;\r\n\tborder: none;\r\n\tborder-radius: 5px;\r\n\tfont-size: 16px;\r\n\tmargin-top: 20px;\n}\n.login-btn[data-v-5b26a3ac]:active {\r\n\tbackground-color: #0056cc;\n}\n.forgot-password[data-v-5b26a3ac] {\r\n\ttext-align: center;\r\n\tmargin-top: 15px;\r\n\tcolor: #007aff;\r\n\tfont-size: 14px;\r\n\tcursor: pointer;\n}\n.forgot-password[data-v-5b26a3ac]:active {\r\n\tcolor: #0056cc;\n}\r\n\r\n/* 忘记密码弹窗样式 */\n.forgot-popup-content[data-v-5b26a3ac] {\r\n\twidth: 320px;\r\n\tbackground-color: white;\r\n\tborder-radius: 10px;\r\n\tpadding: 20px;\r\n\tz-index: 10001;\r\n\tposition: relative;\n}\n.forgot-popup-title[data-v-5b26a3ac] {\r\n\tfont-size: 18px;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\r\n\tmargin-bottom: 20px;\r\n\tcolor: #333;\n}\n.security-question-text[data-v-5b26a3ac] {\r\n\tbackground-color: #f5f5f5;\r\n\tpadding: 15px;\r\n\tborder-radius: 5px;\r\n\tmargin-bottom: 20px;\r\n\tfont-size: 14px;\r\n\tcolor: #333;\r\n\tline-height: 1.5;\r\n\tmin-height: 50px;\r\n\tdisplay: flex;\r\n\talign-items: center;\n}\n.forgot-popup-buttons[data-v-5b26a3ac] {\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\tmargin-top: 20px;\n}\n.btn-cancel[data-v-5b26a3ac] {\r\n\tflex: 1;\r\n\theight: 40px;\r\n\tbackground-color: #f5f5f5;\r\n\tcolor: #666;\r\n\tborder: none;\r\n\tborder-radius: 5px;\r\n\tmargin-right: 10px;\n}\n.btn-confirm[data-v-5b26a3ac] {\r\n\tflex: 1;\r\n\theight: 40px;\r\n\tbackground-color: #007aff;\r\n\tcolor: white;\r\n\tborder: none;\r\n\tborder-radius: 5px;\r\n\tmargin-left: 10px;\n}\n.no-security-tip[data-v-5b26a3ac] {\r\n\ttext-align: center;\r\n\tcolor: #999;\r\n\tfont-size: 14px;\r\n\tmargin-top: 20px;\n}\n.no-security-tip uni-button[data-v-5b26a3ac] {\r\n\twidth: 100%;\r\n\theight: 40px;\r\n\tbackground-color: #007aff;\r\n\tcolor: white;\r\n\tborder: none;\r\n\tborder-radius: 5px;\n}\r\n", ""]);
+exports.push([module.i, "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n/* 指纹识别相关样式已移除，改为自动验证 */\r\n\r\n/* 指纹设置弹窗样式 */\n.fingerprint-setup-content[data-v-5b26a3ac] {\r\n\twidth: 320px;\r\n\tmax-width: 90vw;\r\n\tbackground-color: white;\r\n\tborder-radius: 15px;\r\n\tpadding: 25px 20px;\r\n\ttext-align: center;\r\n\tbox-sizing: border-box;\n}\n.fingerprint-setup-title[data-v-5b26a3ac] {\r\n\tfont-size: 18px;\r\n\tfont-weight: bold;\r\n\tcolor: #333;\r\n\tmargin-bottom: 15px;\r\n\tword-wrap: break-word;\n}\n.fingerprint-setup-desc[data-v-5b26a3ac] {\r\n\tfont-size: 14px;\r\n\tcolor: #666;\r\n\tline-height: 1.5;\r\n\tmargin-bottom: 25px;\r\n\tword-wrap: break-word;\r\n\ttext-align: left;\r\n\tpadding: 0 5px;\n}\n.fingerprint-setup-buttons[data-v-5b26a3ac] {\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\tgap: 12px;\n}\n.fingerprint-setup-buttons .btn-cancel[data-v-5b26a3ac],\r\n.fingerprint-setup-buttons .btn-confirm[data-v-5b26a3ac] {\r\n\tflex: 1;\r\n\theight: 42px;\r\n\tborder: none;\r\n\tborder-radius: 8px;\r\n\tfont-size: 15px;\r\n\tfont-weight: 500;\r\n\twhite-space: nowrap;\r\n\toverflow: hidden;\r\n\ttext-overflow: ellipsis;\n}\n.fingerprint-setup-buttons .btn-cancel[data-v-5b26a3ac] {\r\n\tbackground-color: #f5f5f5;\r\n\tcolor: #666;\n}\n.fingerprint-setup-buttons .btn-confirm[data-v-5b26a3ac] {\r\n\tbackground-color: #007aff;\r\n\tcolor: white;\n}\n.login-container[data-v-5b26a3ac] {\r\n\tdisplay: flex;\r\n\tjustify-content: center;\r\n\talign-items: center;\r\n\tmin-height: 100vh;\r\n\tbackground-color: #f5f5f5;\r\n\tposition: relative;\n}\r\n\r\n/* 指纹验证时的白色磨砂背景覆盖层 */\n.fingerprint-overlay[data-v-5b26a3ac] {\r\n\tposition: fixed;\r\n\ttop: 0;\r\n\tleft: 0;\r\n\tright: 0;\r\n\tbottom: 0;\r\n\tbackground: rgba(255, 255, 255, 0.8);\r\n\tbackdrop-filter: blur(10px);\r\n\t-webkit-backdrop-filter: blur(10px);\r\n\tz-index: 999;\r\n\t-webkit-animation: fadeIn-data-v-5b26a3ac 0.3s ease-in-out;\r\n\t        animation: fadeIn-data-v-5b26a3ac 0.3s ease-in-out;\n}\n@-webkit-keyframes fadeIn-data-v-5b26a3ac {\nfrom {\r\n\t\topacity: 0;\n}\nto {\r\n\t\topacity: 1;\n}\n}\n@keyframes fadeIn-data-v-5b26a3ac {\nfrom {\r\n\t\topacity: 0;\n}\nto {\r\n\t\topacity: 1;\n}\n}\n.login-box[data-v-5b26a3ac] {\r\n\twidth: 300px;\r\n\tpadding: 40px 30px;\r\n\tbackground-color: white;\r\n\tborder-radius: 10px;\r\n\tbox-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);\r\n\tposition: relative;\r\n\tz-index: 1;\n}\n.title[data-v-5b26a3ac] {\r\n\tfont-size: 24px;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\r\n\tmargin-bottom: 30px;\r\n\tcolor: #333;\n}\n.login-btn[data-v-5b26a3ac] {\r\n\twidth: 100%;\r\n\theight: 45px;\r\n\tbackground-color: #007aff;\r\n\tcolor: white;\r\n\tborder: none;\r\n\tborder-radius: 5px;\r\n\tfont-size: 16px;\r\n\tmargin-top: 20px;\n}\n.login-btn[data-v-5b26a3ac]:active {\r\n\tbackground-color: #0056cc;\n}\n.forgot-password[data-v-5b26a3ac] {\r\n\ttext-align: center;\r\n\tmargin-top: 15px;\r\n\tcolor: #007aff;\r\n\tfont-size: 14px;\r\n\tcursor: pointer;\n}\n.forgot-password[data-v-5b26a3ac]:active {\r\n\tcolor: #0056cc;\n}\r\n\r\n/* 忘记密码弹窗样式 */\n.forgot-popup-content[data-v-5b26a3ac] {\r\n\twidth: 320px;\r\n\tbackground-color: white;\r\n\tborder-radius: 10px;\r\n\tpadding: 20px;\r\n\tz-index: 10001;\r\n\tposition: relative;\n}\n.forgot-popup-title[data-v-5b26a3ac] {\r\n\tfont-size: 18px;\r\n\tfont-weight: bold;\r\n\ttext-align: center;\r\n\tmargin-bottom: 20px;\r\n\tcolor: #333;\n}\n.security-question-text[data-v-5b26a3ac] {\r\n\tbackground-color: #f5f5f5;\r\n\tpadding: 15px;\r\n\tborder-radius: 5px;\r\n\tmargin-bottom: 20px;\r\n\tfont-size: 14px;\r\n\tcolor: #333;\r\n\tline-height: 1.5;\r\n\tmin-height: 50px;\r\n\tdisplay: flex;\r\n\talign-items: center;\n}\n.forgot-popup-buttons[data-v-5b26a3ac] {\r\n\tdisplay: flex;\r\n\tjustify-content: space-between;\r\n\tmargin-top: 20px;\n}\n.btn-cancel[data-v-5b26a3ac] {\r\n\tflex: 1;\r\n\theight: 40px;\r\n\tbackground-color: #f5f5f5;\r\n\tcolor: #666;\r\n\tborder: none;\r\n\tborder-radius: 5px;\r\n\tmargin-right: 10px;\n}\n.btn-confirm[data-v-5b26a3ac] {\r\n\tflex: 1;\r\n\theight: 40px;\r\n\tbackground-color: #007aff;\r\n\tcolor: white;\r\n\tborder: none;\r\n\tborder-radius: 5px;\r\n\tmargin-left: 10px;\n}\n.no-security-tip[data-v-5b26a3ac] {\r\n\ttext-align: center;\r\n\tcolor: #999;\r\n\tfont-size: 14px;\r\n\tmargin-top: 20px;\n}\n.no-security-tip uni-button[data-v-5b26a3ac] {\r\n\twidth: 100%;\r\n\theight: 40px;\r\n\tbackground-color: #007aff;\r\n\tcolor: white;\r\n\tborder: none;\r\n\tborder-radius: 5px;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
