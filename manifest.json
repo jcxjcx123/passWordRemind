@@ -2,8 +2,8 @@
     "name" : "密码备忘录",
     "appid" : "__UNI__8DF0A0B",
     "description" : "",
-    "versionName" : "1.4.1",
-    "versionCode" : 500,
+    "versionName" : "1.5.0",
+    "versionCode" : 600,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
@@ -35,10 +35,7 @@
                     "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
-                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
-                    "<uses-permission android:name=\"android.permission.USE_FINGERPRINT\"/>",
-                    "<uses-permission android:name=\"android.permission.USE_BIOMETRIC\"/>",
-                    "<uses-feature android:name=\"android.hardware.fingerprint\" android:required=\"false\"/>"
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ]
             },
             "ios" : {
