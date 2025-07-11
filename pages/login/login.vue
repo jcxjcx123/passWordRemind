@@ -3,6 +3,8 @@
 		<view class="login-box">
 			<view class="title">{{ isFirstLogin ? '设置登录密码' : '输入登录密码' }}</view>
 			
+			<!-- 指纹识别已移除显示按钮，改为自动验证 -->
+			
 			<uni-forms ref="form" :modelValue="formData" :rules="rules">
 				<uni-forms-item name="password" required>
 					<uni-easyinput 
@@ -105,15 +107,32 @@
 			</view>
 		</uni-popup>
 		
+		<!-- 指纹识别启用询问弹窗 -->
+		<uni-popup ref="fingerprintSetupPopup" type="center" :mask-click="false">
+			<view class="fingerprint-setup-content">
+				<view class="fingerprint-setup-title">启用指纹登录</view>
+				<view class="fingerprint-setup-desc">
+					启用指纹识别可以让您更便捷地登录应用，无需每次输入密码。
+				</view>
+				<view class="fingerprint-setup-buttons">
+					<button class="btn-cancel" @click="skipFingerprintSetup">暂不启用</button>
+					<button class="btn-confirm" @click="enableFingerprintLogin">启用</button>
+				</view>
+			</view>
+		</uni-popup>
 
 	</view>
 </template>
 
 <script>
+import FingerprintUtils from './utils/FingerprintUtils.js';
+
 export default {
 		data() {
 			return {
 				isFirstLogin: false,
+				fingerprintEnabled: false,
+				fingerprintAvailable: false,
 				formData: {
 					password: '',
 					confirmPassword: '',
@@ -196,8 +215,24 @@ export default {
 			return securityData && securityData.securityQuestion;
 		}
 	},
-	onLoad() {
+	async onLoad() {
 		this.checkFirstLogin();
+		await this.checkFingerprintAvailability();
+		this.checkFingerprintEnabled();
+		
+		// 如果不是首次登录且启用了指纹识别，自动尝试指纹验证
+		if (!this.isFirstLogin && this.fingerprintEnabled) {
+			// 给用户一个简短的提示，然后自动启动指纹验证
+			uni.showToast({
+				title: '请验证指纹',
+				icon: 'none',
+				duration: 1000
+			});
+			
+			setTimeout(() => {
+				this.authenticateWithFingerprint();
+			}, 800);
+		}
 	},
 	methods: {
 		checkFirstLogin() {
@@ -262,8 +297,14 @@ export default {
 					title: '密码设置成功',
 					icon: 'success'
 				});
-				setTimeout(() => {
-					this.navigateToHome();
+				
+				// 检查是否可以启用指纹识别
+				setTimeout(async () => {
+					if (this.fingerprintAvailable) {
+						this.showFingerprintSetupDialog();
+					} else {
+						this.navigateToHome();
+					}
 				}, 1500);
 			} else {
 				// 登录验证
@@ -392,12 +433,167 @@ export default {
 			setTimeout(() => {
 				this.closeForgotPasswordModal();
 			}, 1500);
+		},
+		
+		// 指纹识别相关方法
+		async checkFingerprintAvailability() {
+			try {
+				const result = await FingerprintUtils.checkAvailability();
+				this.fingerprintAvailable = result.available;
+			} catch (error) {
+				console.log('检查指纹识别可用性失败:', error);
+				this.fingerprintAvailable = false;
+			}
+		},
+		
+		checkFingerprintEnabled() {
+			const enabled = uni.getStorageSync('fingerprintEnabled');
+			this.fingerprintEnabled = enabled === true;
+		},
+		
+		showFingerprintSetupDialog() {
+			this.$refs.fingerprintSetupPopup.open();
+		},
+		
+		skipFingerprintSetup() {
+			this.$refs.fingerprintSetupPopup.close();
+			this.navigateToHome();
+		},
+		
+		async enableFingerprintLogin() {
+			try {
+				// 先进行一次指纹验证确认
+				await FingerprintUtils.authenticate({
+					message: '请验证指纹以启用指纹登录'
+				});
+				
+				// 验证成功，启用指纹登录
+				uni.setStorageSync('fingerprintEnabled', true);
+				this.fingerprintEnabled = true;
+				
+				uni.showToast({
+					title: '指纹登录已启用',
+					icon: 'success'
+				});
+				
+				this.$refs.fingerprintSetupPopup.close();
+				setTimeout(() => {
+					this.navigateToHome();
+				}, 1500);
+			} catch (error) {
+				console.log('启用指纹登录失败:', error);
+				uni.showModal({
+					title: '启用失败',
+					content: error.message || '启用指纹登录失败，请检查设备指纹设置和应用权限',
+					showCancel: false
+				});
+			}
+		},
+		
+		async authenticateWithFingerprint() {
+			try {
+				await FingerprintUtils.authenticate({
+					message: '请验证指纹登录',
+					fallbackButtonTitle: '使用密码登录'
+				});
+				
+				// 指纹验证成功，直接登录
+				uni.showToast({
+					title: '指纹验证成功',
+					icon: 'success'
+				});
+				
+				setTimeout(() => {
+					this.navigateToHome();
+				}, 1000);
+			} catch (error) {
+				console.log('指纹验证失败:', error);
+				
+				// 如果用户选择使用密码登录或验证失败，不显示错误提示
+				// 让用户继续使用密码登录
+				if (error.errorCode !== 3 && error.errorCode !== 4) {
+					// 只有在非用户主动取消的情况下才显示错误提示
+					if (error.errorCode === 1 || error.errorCode === 2) {
+						// 硬件问题或未录入指纹，显示详细信息
+						uni.showModal({
+							title: '指纹验证失败',
+							content: error.message + '，请使用密码登录或检查设备设置',
+							showCancel: false
+						});
+					} else {
+						// 其他错误，显示简短提示
+						uni.showToast({
+							title: error.message || '指纹验证失败',
+							icon: 'error'
+						});
+					}
+				}
+			}
 		}
 	}
 }
 </script>
 
 <style scoped>
+/* 指纹识别相关样式已移除，改为自动验证 */
+
+/* 指纹设置弹窗样式 */
+.fingerprint-setup-content {
+	width: 320px;
+	max-width: 90vw;
+	background-color: white;
+	border-radius: 15px;
+	padding: 25px 20px;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.fingerprint-setup-title {
+	font-size: 18px;
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 15px;
+	word-wrap: break-word;
+}
+
+.fingerprint-setup-desc {
+	font-size: 14px;
+	color: #666;
+	line-height: 1.5;
+	margin-bottom: 25px;
+	word-wrap: break-word;
+	text-align: left;
+	padding: 0 5px;
+}
+
+.fingerprint-setup-buttons {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.fingerprint-setup-buttons .btn-cancel,
+.fingerprint-setup-buttons .btn-confirm {
+	flex: 1;
+	height: 42px;
+	border: none;
+	border-radius: 8px;
+	font-size: 15px;
+	font-weight: 500;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.fingerprint-setup-buttons .btn-cancel {
+	background-color: #f5f5f5;
+	color: #666;
+}
+
+.fingerprint-setup-buttons .btn-confirm {
+	background-color: #007aff;
+	color: white;
+}
 .login-container {
 	display: flex;
 	justify-content: center;

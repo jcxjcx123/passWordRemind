@@ -106,6 +106,13 @@
 					<text class="settings-text">修改密码</text>
 					<uni-icons type="right" size="16" color="#ccc"></uni-icons>
 				</view>
+				<view class="settings-item" @click="openFingerprintSetting">
+					<uni-icons type="scan" size="20" color="#007aff"></uni-icons>
+					<text class="settings-text">指纹识别</text>
+					<view class="settings-switch">
+						<switch :checked="fingerprintEnabled" @change="toggleFingerprint" color="#007aff" />
+					</view>
+				</view>
 				<view class="settings-item" @click="openPhoneSetting">
 					<uni-icons type="phone" size="20" color="#007aff"></uni-icons>
 					<text class="settings-text">预设手机号</text>
@@ -147,6 +154,7 @@ import DetailModal from './components/DetailModal.vue'
 import PasswordModal from './components/PasswordModal.vue'
 import BackupModal from './components/BackupModal.vue'
 import { EncryptionUtils } from './utils/encryption.js'
+import FingerprintUtils from '../login/utils/FingerprintUtils.js'
 
 export default {
 	components: {
@@ -202,13 +210,17 @@ export default {
 			// 交换排序相关数据
 			isSwapMode: false, // 是否处于交换模式
 			selectedSwapIndex: -1, // 选中要交换的第一个项目索引
-			swapAnimationIndex: -1 // 显示动画效果的项目索引
+			swapAnimationIndex: -1, // 显示动画效果的项目索引
+			// 指纹识别相关数据
+			fingerprintEnabled: false, // 指纹识别是否启用
+			fingerprintAvailable: false // 设备是否支持指纹识别
 		}
 	},
-	onLoad() {
+	async onLoad() {
 		this.checkLogin();
 		this.loadPasswordList();
 		this.loadPresetPhone();
+		await this.checkFingerprintStatus();
 	},
 	watch: {
 		showSettingsMenu(newVal) {
@@ -876,6 +888,75 @@ export default {
 			}).catch(err => {
 				console.log('表单验证失败:', err);
 			});
+		},
+		
+		// 指纹识别相关方法
+		async checkFingerprintStatus() {
+			try {
+				const result = await FingerprintUtils.checkAvailability();
+				this.fingerprintAvailable = result.available;
+				const enabled = uni.getStorageSync('fingerprintEnabled');
+				this.fingerprintEnabled = enabled === true && this.fingerprintAvailable;
+			} catch (error) {
+				console.log('检查指纹识别状态失败:', error);
+				this.fingerprintAvailable = false;
+				this.fingerprintEnabled = false;
+			}
+		},
+		
+		openFingerprintSetting() {
+			// 阻止事件冒泡，避免关闭设置菜单
+			event.stopPropagation();
+		},
+		
+		async toggleFingerprint(event) {
+			const enabled = event.detail.value;
+			
+			if (enabled) {
+				// 启用指纹识别
+				if (!this.fingerprintAvailable) {
+					uni.showModal({
+						title: '提示',
+						content: '设备不支持指纹识别或未录入指纹，请先在系统设置中录入指纹',
+						showCancel: false
+					});
+					return;
+				}
+				
+				try {
+					// 先进行一次指纹验证确认
+					await FingerprintUtils.authenticate({
+						message: '请验证指纹以启用指纹登录'
+					});
+					
+					// 验证成功，启用指纹登录
+					uni.setStorageSync('fingerprintEnabled', true);
+					this.fingerprintEnabled = true;
+					
+					uni.showToast({
+						title: '指纹登录已启用',
+						icon: 'success'
+					});
+				} catch (error) {
+					console.log('启用指纹登录失败:', error);
+					uni.showModal({
+						title: '启用失败',
+						content: error.message || '启用指纹登录失败，请检查设备指纹设置和应用权限',
+						showCancel: false
+					});
+					// 重置开关状态
+					this.fingerprintEnabled = false;
+				}
+			} else {
+				// 禁用指纹识别
+				uni.setStorageSync('fingerprintEnabled', false);
+				this.fingerprintEnabled = false;
+				
+				uni.showToast({
+					title: '指纹登录已禁用',
+					icon: 'success'
+				});
+			}
 		}
 
 	}
@@ -1113,6 +1194,11 @@ export default {
 	font-size: 16px;
 	color: #333;
 	margin-left: 12px;
+}
+
+.settings-switch {
+	display: flex;
+	align-items: center;
 }
 
 .detail-item {
