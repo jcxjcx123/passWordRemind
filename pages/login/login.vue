@@ -1,10 +1,8 @@
 <template>
 	<view class="login-container">
+		<view class="fingerprint-overlay" v-if="showFingerprintOverlay"></view>
 		<view class="login-box">
 			<view class="title">{{ isFirstLogin ? '设置登录密码' : '输入登录密码' }}</view>
-			
-			<!-- 指纹识别已移除显示按钮，改为自动验证 -->
-			
 			<uni-forms ref="form" :modelValue="formData" :rules="rules">
 				<uni-forms-item name="password" required>
 					<uni-easyinput 
@@ -133,6 +131,7 @@ export default {
 				isFirstLogin: false,
 				fingerprintEnabled: false,
 				fingerprintAvailable: false,
+				showFingerprintOverlay: false,
 				formData: {
 					password: '',
 					confirmPassword: '',
@@ -492,10 +491,16 @@ export default {
 		
 		async authenticateWithFingerprint() {
 			try {
+				// 显示白色磨砂背景覆盖层
+				this.showFingerprintOverlay = true;
+				
 				await FingerprintUtils.authenticate({
 					message: '请验证指纹登录',
 					fallbackButtonTitle: '使用密码登录'
 				});
+				
+				// 隐藏覆盖层
+				this.showFingerprintOverlay = false;
 				
 				// 指纹验证成功，直接登录
 				uni.showToast({
@@ -508,6 +513,9 @@ export default {
 				}, 1000);
 			} catch (error) {
 				console.log('指纹验证失败:', error);
+				
+				// 隐藏覆盖层
+				this.showFingerprintOverlay = false;
 				
 				// 如果用户选择使用密码登录或验证失败，不显示错误提示
 				// 让用户继续使用密码登录
@@ -600,6 +608,30 @@ export default {
 	align-items: center;
 	min-height: 100vh;
 	background-color: #f5f5f5;
+	position: relative;
+}
+
+/* 指纹验证时的白色磨砂背景覆盖层 */
+.fingerprint-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	z-index: 999;
+	animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 .login-box {
@@ -608,6 +640,8 @@ export default {
 	background-color: white;
 	border-radius: 10px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	position: relative;
+	z-index: 1;
 }
 
 .title {
