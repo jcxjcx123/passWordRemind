@@ -29,10 +29,10 @@
 							:maxlength="50"
 							class="username-input"
 						></uni-easyinput>
-						<view class="phone-icon" @click="fillPresetPhone" v-if="presetPhone">
+						<view class="phone-icon" @click="fillPresetPhone" v-if="presetPhone && !formData.username">
 							<uni-icons type="phone" size="18" color="#007aff"></uni-icons>
 						</view>
-						<view class="phone-icon disabled" @click="showPhoneNotSet" v-else>
+						<view class="phone-icon disabled" @click="showPhoneNotSet" v-if="!presetPhone && formData.username">
 							<uni-icons type="phone" size="18" color="#ccc"></uni-icons>
 						</view>
 					</view>
@@ -332,7 +332,7 @@ export default {
 }
 
 
-/deep/ .uni-forms-item {
+::v-deep .uni-forms-item {
 	margin-top: 20px;
 }
 </style>
