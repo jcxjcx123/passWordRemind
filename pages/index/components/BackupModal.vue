@@ -5,14 +5,14 @@
 			
 			<view class="backup-section">
 				<view class="section-title">数据导出</view>
-				<view class="section-desc">将所有密码数据导出为文件</view>
+				<view class="section-desc">将所有密码数据导出为加密后的数据<br/><span class="warning">*请自行保存好密码数据,备份数据丢失的话你就炸了</span></view>
 				<button class="backup-btn" @click="$emit('export')">导出数据</button>
 			</view>
 			
 			<view class="backup-section">
 				<view class="section-title">数据导入</view>
-				<view class="section-desc">从备份文件恢复密码数据</view>
-				<button class="backup-btn" @click="$emit('import')">选择文件导入</button>
+				<view class="section-desc">从剪贴板恢复密码数据</view>
+				<button class="backup-btn" @click="$emit('import')">导入剪贴板数据</button>
 			</view>
 			
 			<view class="popup-buttons">
@@ -88,6 +88,10 @@ export default {
 	border: 1px solid #e0e0e0;
 	border-radius: 8px;
 	background-color: #f9f9f9;
+}
+
+.warning{
+	color: red;
 }
 
 .section-title {

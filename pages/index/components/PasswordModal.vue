@@ -30,6 +30,26 @@
 						:maxlength="20"
 					></uni-easyinput>
 				</uni-forms-item>
+				
+				<!-- 安全问题设置 -->
+				<view class="security-section">
+					<view class="security-title">安全问题设置（可选）</view>
+					<uni-forms-item name="securityQuestion" label="安全问题">
+						<uni-easyinput 
+							v-model="formData.securityQuestion" 
+							placeholder="请输入安全问题（用于找回密码）" 
+							:maxlength="100"
+						></uni-easyinput>
+					</uni-forms-item>
+					
+					<uni-forms-item name="securityAnswer" label="安全答案" v-if="formData.securityQuestion">
+						<uni-easyinput 
+							v-model="formData.securityAnswer" 
+							placeholder="请输入安全问题答案" 
+							:maxlength="50"
+						></uni-easyinput>
+					</uni-forms-item>
+				</view>
 			</uni-forms>
 			
 			<view class="popup-buttons">
@@ -55,7 +75,9 @@ export default {
 			formData: {
 				oldPassword: '',
 				newPassword: '',
-				confirmPassword: ''
+				confirmPassword: '',
+				securityQuestion: '',
+				securityAnswer: ''
 			},
 			formRules: {
 				oldPassword: {
@@ -85,27 +107,48 @@ export default {
 							return true;
 						}
 					}]
+				},
+				securityAnswer: {
+					rules: [{
+						validateFunction: (rule, value, data, callback) => {
+							if (data.securityQuestion && !value) {
+								callback('请输入安全问题答案');
+							}
+							return true;
+						}
+					}]
 				}
 			}
 		}
 	},
 	watch: {
-		visible(val) {
-			if (val) {
-				this.$refs.popup.open();
-			} else {
-				this.$refs.popup.close();
-				this.resetForm();
+			visible(val) {
+				if (val) {
+					this.loadSecuritySettings();
+					this.$refs.popup.open();
+				} else {
+					this.$refs.popup.close();
+					this.resetForm();
+				}
 			}
-		}
-	},
+		},
 	methods: {
 		resetForm() {
 			this.formData = {
 				oldPassword: '',
 				newPassword: '',
-				confirmPassword: ''
+				confirmPassword: '',
+				securityQuestion: '',
+				securityAnswer: ''
 			};
+		},
+		
+		loadSecuritySettings() {
+			const securityData = uni.getStorageSync('loginSecurityData');
+			if (securityData) {
+				this.formData.securityQuestion = securityData.securityQuestion || '';
+				this.formData.securityAnswer = securityData.securityAnswer || '';
+			}
 		},
 		handleCancel() {
 			this.$emit('close');
@@ -160,6 +203,19 @@ export default {
 	color: white;
 	border: none;
 	border-radius: 5px;
-	margin-left: 10px;
-}
+		margin-left: 10px;
+	}
+	
+	.security-section {
+		margin-top: 20px;
+		padding-top: 20px;
+		border-top: 1px solid #f0f0f0;
+	}
+	
+	.security-title {
+		font-size: 14px;
+		color: #666;
+		margin-bottom: 15px;
+		font-weight: 500;
+	}
 </style>

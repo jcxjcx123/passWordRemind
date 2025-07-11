@@ -21,23 +21,118 @@
 						:maxlength="20"
 					></uni-easyinput>
 				</uni-forms-item>
+				
+				<uni-forms-item v-if="isFirstLogin" name="securityQuestion">
+					<uni-easyinput 
+						v-model="formData.securityQuestion" 
+						placeholder="请输入安全问题（可选）"
+						:maxlength="100"
+					></uni-easyinput>
+				</uni-forms-item>
+				
+				<uni-forms-item v-if="isFirstLogin && formData.securityQuestion" name="securityAnswer">
+					<uni-easyinput 
+						v-model="formData.securityAnswer" 
+						placeholder="请输入安全问题答案"
+						:maxlength="50"
+					></uni-easyinput>
+				</uni-forms-item>
 			</uni-forms>
 			
 			<button class="login-btn" @click="handleLogin">{{ isFirstLogin ? '设置密码' : '登录' }}</button>
+			
+			<view class="forgot-password" v-if="!isFirstLogin && hasSecurityQuestion" @click="showForgotPasswordModal">
+				忘记密码？
+			</view>
 		</view>
+		
+		<!-- 忘记密码弹窗 -->
+		<uni-popup ref="forgotPasswordPopup" type="center" :mask-click="false">
+			<view class="forgot-popup-content">
+				<view class="forgot-popup-title">找回密码</view>
+				
+				<view v-if="!showResetPassword">
+					<view class="security-question-text">{{ securityQuestion || '未设置安全问题' }}</view>
+					
+					<uni-forms ref="securityForm" :modelValue="securityFormData" :rules="securityRules" v-if="securityQuestion">
+						<uni-forms-item name="answer" required>
+							<uni-easyinput 
+								v-model="securityFormData.answer" 
+								placeholder="请输入安全问题答案"
+								:maxlength="50"
+							></uni-easyinput>
+						</uni-forms-item>
+					</uni-forms>
+					
+					<view class="forgot-popup-buttons">
+						<button class="btn-cancel" @click="closeForgotPasswordModal">取消</button>
+						<button class="btn-confirm" @click="verifySecurityAnswer" v-if="securityQuestion">验证</button>
+					</view>
+					
+					<view class="no-security-tip" v-if="!securityQuestion">
+						<text>未设置安全问题，无法找回密码</text>
+						<button class="btn-confirm" @click="closeForgotPasswordModal" style="margin-top: 20px;">确定</button>
+					</view>
+				</view>
+				
+				<!-- 重置密码界面 -->
+				<view v-if="showResetPassword">
+					<uni-forms ref="resetForm" :modelValue="resetFormData" :rules="resetRules">
+						<uni-forms-item name="newPassword" required>
+							<uni-easyinput 
+								v-model="resetFormData.newPassword" 
+								type="password"
+								placeholder="请输入新密码"
+								:maxlength="20"
+							></uni-easyinput>
+						</uni-forms-item>
+						
+						<uni-forms-item name="confirmPassword" required>
+							<uni-easyinput 
+								v-model="resetFormData.confirmPassword" 
+								type="password"
+								placeholder="确认新密码"
+								:maxlength="20"
+							></uni-easyinput>
+						</uni-forms-item>
+					</uni-forms>
+					
+					<view class="forgot-popup-buttons">
+						<button class="btn-cancel" @click="backToSecurityQuestion">返回</button>
+						<button class="btn-confirm" @click="resetPassword">重置密码</button>
+					</view>
+				</view>
+			</view>
+		</uni-popup>
+		
+
 	</view>
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			isFirstLogin: false,
-			formData: {
-				password: '',
-				confirmPassword: ''
-			},
-			rules: {
+		data() {
+			return {
+				isFirstLogin: false,
+				formData: {
+					password: '',
+					confirmPassword: '',
+					securityQuestion: '',
+					securityAnswer: ''
+				},
+				// 忘记密码相关数据
+				showResetPassword: false,
+				securityQuestion: '',
+				securityAnswer: '',
+				securityFormData: {
+					answer: ''
+				},
+				resetFormData: {
+					newPassword: '',
+					confirmPassword: ''
+				},
+
+				rules: {
 				password: {
 					rules: [{
 						required: true,
@@ -59,8 +154,46 @@ export default {
 							return true;
 						}
 					}]
+				},
+				securityRules: {
+					answer: {
+						rules: [{
+							required: true,
+							errorMessage: '请输入安全问题答案'
+						}]
+					}
+				},
+				resetRules: {
+					newPassword: {
+						rules: [{
+							required: true,
+							errorMessage: '请输入新密码'
+						}, {
+							minLength: 6,
+							errorMessage: '密码长度不能少于6位'
+						}]
+					},
+					confirmPassword: {
+						rules: [{
+							required: true,
+							errorMessage: '请确认密码'
+						}, {
+							validateFunction: (rule, value, data, callback) => {
+								if (value !== data.newPassword) {
+									callback('两次输入的密码不一致');
+								}
+								return true;
+							}
+						}]
+					}
 				}
 			}
+		}
+	},
+	computed: {
+		hasSecurityQuestion() {
+			const securityData = uni.getStorageSync('loginSecurityData');
+			return securityData && securityData.securityQuestion;
 		}
 	},
 	onLoad() {
@@ -104,8 +237,27 @@ export default {
 					return;
 				}
 				
+				// 验证安全问题设置
+				if (this.formData.securityQuestion && !this.formData.securityAnswer) {
+					uni.showToast({
+						title: '请输入安全问题答案',
+						icon: 'error'
+					});
+					return;
+				}
+				
 				// 设置密码
 				uni.setStorageSync('loginPassword', this.formData.password);
+				
+				// 如果设置了安全问题，单独保存
+				if (this.formData.securityQuestion && this.formData.securityAnswer) {
+					const securityData = {
+						securityQuestion: this.formData.securityQuestion,
+						securityAnswer: this.formData.securityAnswer
+					};
+					uni.setStorageSync('loginSecurityData', securityData);
+				}
+				
 				uni.showToast({
 					title: '密码设置成功',
 					icon: 'success'
@@ -139,6 +291,107 @@ export default {
 			uni.reLaunch({
 				url: '/pages/index/index'
 			});
+		},
+		
+		// 忘记密码相关方法
+		showForgotPasswordModal() {
+			this.loadSecurityQuestion();
+			this.$refs.forgotPasswordPopup.open();
+		},
+		
+		closeForgotPasswordModal() {
+			this.$refs.forgotPasswordPopup.close();
+			this.resetForgotPasswordData();
+		},
+		
+		resetForgotPasswordData() {
+			this.showResetPassword = false;
+			this.securityFormData.answer = '';
+			this.resetFormData.newPassword = '';
+			this.resetFormData.confirmPassword = '';
+		},
+		
+		loadSecurityQuestion() {
+			// 从单独的安全问题存储中读取
+			const securityData = uni.getStorageSync('loginSecurityData');
+			
+			if (securityData && securityData.securityQuestion && securityData.securityAnswer) {
+				this.securityQuestion = securityData.securityQuestion;
+				this.securityAnswer = securityData.securityAnswer;
+			} else {
+				this.securityQuestion = '';
+				this.securityAnswer = '';
+			}
+		},
+		
+		verifySecurityAnswer() {
+			if (!this.securityFormData.answer) {
+				uni.showToast({
+					title: '请输入安全问题答案',
+					icon: 'error'
+				});
+				return;
+			}
+			
+			if (this.securityFormData.answer === this.securityAnswer) {
+				this.showResetPassword = true;
+			} else {
+				uni.showToast({
+					title: '安全问题答案错误',
+					icon: 'error'
+				});
+			}
+		},
+		
+		backToSecurityQuestion() {
+			this.showResetPassword = false;
+			this.resetFormData.newPassword = '';
+			this.resetFormData.confirmPassword = '';
+		},
+		
+		resetPassword() {
+			if (!this.resetFormData.newPassword) {
+				uni.showToast({
+					title: '请输入新密码',
+					icon: 'error'
+				});
+				return;
+			}
+			
+			if (this.resetFormData.newPassword.length < 6) {
+				uni.showToast({
+					title: '密码长度不能少于6位',
+					icon: 'error'
+				});
+				return;
+			}
+			
+			if (!this.resetFormData.confirmPassword) {
+				uni.showToast({
+					title: '请确认密码',
+					icon: 'error'
+				});
+				return;
+			}
+			
+			if (this.resetFormData.newPassword !== this.resetFormData.confirmPassword) {
+				uni.showToast({
+					title: '两次输入的密码不一致',
+					icon: 'error'
+				});
+				return;
+			}
+			
+			// 重置登录密码
+			uni.setStorageSync('loginPassword', this.resetFormData.newPassword);
+			uni.showToast({
+				title: '密码重置成功',
+				icon: 'success'
+			});
+			
+			setTimeout(() => {
+				this.closeForgotPasswordModal();
+			}, 1500);
 		}
 	}
 }
@@ -182,5 +435,92 @@ export default {
 
 .login-btn:active {
 	background-color: #0056cc;
+}
+
+.forgot-password {
+	text-align: center;
+	margin-top: 15px;
+	color: #007aff;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.forgot-password:active {
+	color: #0056cc;
+}
+
+
+
+/* 忘记密码弹窗样式 */
+.forgot-popup-content {
+	width: 320px;
+	background-color: white;
+	border-radius: 10px;
+	padding: 20px;
+	z-index: 10001;
+	position: relative;
+}
+
+.forgot-popup-title {
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 20px;
+	color: #333;
+}
+
+.security-question-text {
+	background-color: #f5f5f5;
+	padding: 15px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	font-size: 14px;
+	color: #333;
+	line-height: 1.5;
+	min-height: 50px;
+	display: flex;
+	align-items: center;
+}
+
+.forgot-popup-buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.btn-cancel {
+	flex: 1;
+	height: 40px;
+	background-color: #f5f5f5;
+	color: #666;
+	border: none;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+
+.btn-confirm {
+	flex: 1;
+	height: 40px;
+	background-color: #007aff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	margin-left: 10px;
+}
+
+.no-security-tip {
+	text-align: center;
+	color: #999;
+	font-size: 14px;
+	margin-top: 20px;
+}
+
+.no-security-tip button {
+	width: 100%;
+	height: 40px;
+	background-color: #007aff;
+	color: white;
+	border: none;
+	border-radius: 5px;
 }
 </style>

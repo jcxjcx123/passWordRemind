@@ -602,7 +602,7 @@ export default {
 		
 		handlePasswordChange(passwordData) {
 			const currentPassword = uni.getStorageSync('loginPassword');
-			if (passwordData.currentPassword !== currentPassword) {
+			if (passwordData.oldPassword !== currentPassword) {
 				uni.showToast({
 					title: '当前密码错误',
 					icon: 'none'
@@ -618,10 +618,32 @@ export default {
 				return;
 			}
 			
+			// 验证安全问题设置
+			if (passwordData.securityQuestion && !passwordData.securityAnswer) {
+				uni.showToast({
+					title: '请输入安全问题答案',
+					icon: 'error'
+				});
+				return;
+			}
+			
+			// 保存新密码
 			uni.setStorageSync('loginPassword', passwordData.newPassword);
 			
+			// 保存或删除安全问题设置
+			if (passwordData.securityQuestion && passwordData.securityAnswer) {
+				const securityData = {
+					securityQuestion: passwordData.securityQuestion,
+					securityAnswer: passwordData.securityAnswer
+				};
+				uni.setStorageSync('loginSecurityData', securityData);
+			} else {
+				// 如果安全问题为空，则删除安全问题设置
+				uni.removeStorageSync('loginSecurityData');
+			}
+			
 			uni.showToast({
-				title: '密码修改成功',
+				title: '密码和安全设置修改成功',
 				icon: 'success'
 			});
 			
