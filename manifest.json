@@ -6,7 +6,6 @@
     "versionCode" : 400,
     "transformPx" : false,
     "app-plus" : {
-        /* 5+App特有相关 */
         "usingComponents" : true,
         "nvueCompiler" : "uni-app",
         "nvueStyleCompiler" : "uni-app",
@@ -16,12 +15,11 @@
             "autoclose" : true,
             "delay" : 0
         },
-        "modules" : {},
-        /* 模块配置 */
+        "modules" : {
+            "Fingerprint" : {}
+        },
         "distribute" : {
-            /* 应用发布信息 */
             "android" : {
-                /* android打包配置 */
                 "permissions" : [
                     "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
@@ -43,7 +41,6 @@
             "ios" : {
                 "dSYMs" : false
             },
-            /* ios打包配置 */
             "sdkConfigs" : {
                 "ad" : {}
             },
@@ -89,11 +86,8 @@
             }
         }
     },
-    /* SDK配置 */
     "quickapp" : {},
-    /* 快应用特有相关 */
     "mp-weixin" : {
-        /* 小程序特有相关 */
         "appid" : "",
         "setting" : {
             "urlCheck" : false
