@@ -79,9 +79,9 @@
             "splashscreen" : {
                 "androidStyle" : "default",
                 "android" : {
-                    "xhdpi" : "C:/Users/jetron/Desktop/adbf0c99-bbef-4b2e-873a-87a474b1e531.png",
-                    "xxhdpi" : "C:/Users/jetron/Desktop/adbf0c99-bbef-4b2e-873a-87a474b1e531.png",
-                    "hdpi" : "C:/Users/jetron/Desktop/adbf0c99-bbef-4b2e-873a-87a474b1e531.png"
+                    "xhdpi" : "static/startBg.png",
+                    "xxhdpi" : "static/startBg.png",
+                    "hdpi" : "static/startBg.png"
                 }
             }
         }
