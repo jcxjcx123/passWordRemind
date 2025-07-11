@@ -2,8 +2,8 @@
     "name" : "密码备忘录",
     "appid" : "__UNI__8DF0A0B",
     "description" : "",
-    "versionName" : "1.3.0",
-    "versionCode" : 400,
+    "versionName" : "1.4.1",
+    "versionCode" : 500,
     "transformPx" : false,
     "app-plus" : {
         "usingComponents" : true,
